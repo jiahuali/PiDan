@@ -1,12 +1,18 @@
 apply plugin: 'java-library'
 apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.jiahuali'
+group = 'com.github.jiahuali'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.google.auto.service:auto-service:1.0-rc2'
-    implementation 'com.squareup:javapoet:1.11.1'
-    implementation project(":pidan-annotation")
+    api 'com.google.auto.service:auto-service:1.0-rc2'
+    api 'com.squareup:javapoet:1.11.1'
+    api project(":pidan-annotation")
 }
 
 sourceCompatibility = "1.8"
 targetCompatibility = "1.8"
+
+
+
+
+
+
