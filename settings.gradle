@@ -1,1 +1,3 @@
-include  ':pidan-annotation',  ':pidan-processor'
+include ':pidan-plugin'
+include ':app'
+include  ':pidan-annotation', ':pidan-compiler'

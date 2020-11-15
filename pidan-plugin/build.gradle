@@ -1,18 +1,18 @@
-apply plugin: 'java-library'
+apply plugin: 'groovy'
 apply plugin: 'maven'
-
 /**定义工件的group、name 和 version*/
 group = 'com.carverlee.pidan'
-archivesBaseName = 'pidan-annotation'
+archivesBaseName = 'pidan-plugin'
 version = '1.0.0'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation gradleApi()
+    implementation localGroovy()
+//    implementation 'com.android.tools.build:gradle:3.1.3'
+    implementation 'org.aspectj:aspectjtools:1.8.10'
+    implementation 'org.aspectj:aspectjrt:1.8.9'
 }
-
-
-sourceCompatibility = "1.8"
-targetCompatibility = "1.8"
 
 //设置maven deployer
 uploadArchives {
