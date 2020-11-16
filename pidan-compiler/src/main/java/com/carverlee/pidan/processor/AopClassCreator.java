@@ -88,7 +88,7 @@ class AopClassCreator {
                 .addStatement("String methodName = signature.getDeclaringTypeName() + \".\" + signature.getName()")
                 .addStatement("long before = System.currentTimeMillis()")
                 .addStatement("Object proceed = point.proceed()")
-                .addStatement("$T.i($S, \"timeCount: \" + methodName + \",execute time:\" + (System.currentTimeMillis() - before))", CLASS_LOG, tag)
+                .addStatement("$T.i($S, \"timeCount: \" + methodName + \",execute time:\" + (System.currentTimeMillis() - before)+\" ms\")", CLASS_LOG, tag)
                 .addStatement("return proceed")
                 .build();
         return MethodSpec.methodBuilder("log" + seq++)

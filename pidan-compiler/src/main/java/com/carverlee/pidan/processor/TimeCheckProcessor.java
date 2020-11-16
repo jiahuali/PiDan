@@ -62,7 +62,9 @@ public class TimeCheckProcessor extends AbstractProcessor {
             return false;
         }
         Element globalTimeCheck = CollectionUtils.findItem(elements,
-                (item) -> item.getAnnotation(TimeCheck.class).scope() == CheckScope.GLOBAL);
+                (item) -> item.getKind().isClass()
+                        &&
+                        item.getAnnotation(TimeCheck.class).scope() == CheckScope.GLOBAL);
 
         if (globalTimeCheck != null) {
             messager.printMessage(Diagnostic.Kind.NOTE, "create global");
@@ -74,10 +76,20 @@ public class TimeCheckProcessor extends AbstractProcessor {
             }
             return true;
         }
+
+        CollectionUtils.doForEach(elements, (item) -> {
+            messager.printMessage(Diagnostic.Kind.NOTE, item.getSimpleName() + ",is class?" +
+                    item.getKind().isClass() + ",is field?" + item.getKind().isField());
+        });
+
         List<? extends Element> classElements = CollectionUtils.findItemList(elements,
-                (item) -> item.getAnnotation(TimeCheck.class).scope() == CheckScope.CLASS);
+                (item) -> item.getKind().isClass()
+                        &&
+                        item.getAnnotation(TimeCheck.class).scope() == CheckScope.CLASS);
         List<? extends Element> packageElements = CollectionUtils.findItemList(elements,
-                (item) -> item.getAnnotation(TimeCheck.class).scope() == CheckScope.PACKAGE);
+                (item) -> item.getKind().isClass()
+                        &&
+                        item.getAnnotation(TimeCheck.class).scope() == CheckScope.PACKAGE);
         try {
             mergeCheck(packageElements, classElements);
         } catch (IOException e) {
